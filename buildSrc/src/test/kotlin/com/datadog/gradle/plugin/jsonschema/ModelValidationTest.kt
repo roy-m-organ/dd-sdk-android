@@ -38,7 +38,6 @@ class ModelValidationTest(
         val toJson = type.getMethod("toJson")
         val schema = loadSchema(schemaResourcePath)
         val file = javaClass.getResource("/input/").file
-        println(">> SCOPE PATH : file://$file")
         val schemaLoader = SchemaLoader.builder()
             .resolutionScope("file://$file")
             .schemaJson(schema)
@@ -66,13 +65,11 @@ class ModelValidationTest(
             // skip this test as is not relevant anymore. We are just testing a constructor.
             return
         }
-        val generatorFunction =
-            type.getMethod("fromJson", String::class.java)
+        val generatorFunction = type.getMethod("fromJson", String::class.java)
         repeat(10) {
             val entity = forge.getForgery(type)
             val json = toJson.invoke(entity).toString()
-            val generatedModel =
-                generatorFunction.invoke(null, json)
+            val generatedModel = generatorFunction.invoke(null, json)
 
             assertThat(generatedModel)
                 .overridingErrorMessage(
@@ -111,6 +108,7 @@ class ModelValidationTest(
                 arrayOf("arrays", OutputInfo("Article")),
                 arrayOf("nested", OutputInfo("Book")),
                 arrayOf("additional_props", OutputInfo("Comment")),
+                arrayOf("additional_props_any", OutputInfo("Company")),
                 arrayOf("definition_name_conflict", OutputInfo("Conflict")),
                 arrayOf("definition", OutputInfo("Customer")),
                 arrayOf("definition_with_id", OutputInfo("Customer")),

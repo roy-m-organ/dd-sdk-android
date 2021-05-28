@@ -23,5 +23,6 @@
         "type": "string"
       }
     }
-  }
+  },
+  "additionalProperties": false
 }

@@ -6,8 +6,8 @@
 
 package com.datadog.gradle.plugin.jsonschema
 
-import com.datadog.android.core.internal.utils.toJsonArray
 import com.example.forgery.ForgeryConfiguration
+import com.example.model.toJsonArray
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.JsonNull
